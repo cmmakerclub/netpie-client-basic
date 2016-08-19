@@ -42,14 +42,16 @@ var websocketclient = {
         var appId = $("#appIdInput").val();
         var appKey = $("#appKeyInput").val();
         var appSecret = $("#appSecretInput").val();
+        var gearAlias= $("#gearAlias").val();
 
 
         // this.client = new Messaging.Client(host, port, clientId);
         this.client = new Microgear.create({
             key: appKey,
             secret: appSecret,
-            alias: "nat_html5"
+            alias: gearAlias || "nat_html5"
         });
+        window.microgear = this.client;
 
 
         this.client.on("connected", this.onConnect);
@@ -142,7 +144,7 @@ var websocketclient = {
         if (!websocketclient.connected) {
             websocketclient.render.showError("Not connected");
             return false;
-        }
+        } 
 
         this.client.publish(topic, payload, qos, retain);
         // var message = new Messaging.Message(payload);
@@ -261,12 +263,13 @@ var websocketclient = {
         'message': function (message) {
 
             var largest = websocketclient.lastMessageId++;
+            var _topic = "/"+message.topic.split("/").slice(2).join("/");
 
             var html = '<li class="messLine id="' + largest + '">' +
                 '   <div class="row large-12 mess' + largest + '" style="border-left: solid 10px #' + message.color + '; ">' +
                 '       <div class="large-12 columns messageText">' +
                 '           <div class="large-3 columns date">' + message.timestamp.format("YYYY-MM-DD HH:mm:ss") + '</div>' +
-                '           <div class="large-5 columns topicM truncate" id="topicM' + largest + '" title="' + Encoder.htmlEncode(message.topic, 0) + '">Topic: ' + Encoder.htmlEncode(message.topic) + '</div>' +
+                '           <div class="large-5 columns topicM" id="topicM' + largest + '" title="' + Encoder.htmlEncode(message.topic, 0) + '">Topic: ' + Encoder.htmlEncode(message.topic) + '</div>' +
                 // '           <div class="large-2 columns qos">Qos: ' + message.qos + '</div>' +
                 '           <div class="large-2 columns retain">';
             if (message.retained) {
