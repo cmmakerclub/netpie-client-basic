@@ -79,17 +79,18 @@ limitations under the License.
 
                         <div class="large-4 columns">
                             <label>APP ID</label>
-                            <input id="appIdInput" type="text" value="HelloNETPIE"/>
+                            <!-- <input id="appIdInput" type="text" value="HelloNETPIE"/> -->
+                            <input id="appIdInput" type="text"/>
                         </div>
 
                         <div class="large-3 columns">
                             <label>APP KEY</label>
-                            <input id="appKeyInput" type="text" value="ux7QmHgKEaWx7rt"/>
+                            <input id="appKeyInput" type="text"/>
                         </div>
 
                         <div class="large-3 columns">
                             <label>APP SECRET</label>
-                            <input id="appSecretInput" value="CfvpYcTlHKWAs4l3PWlNHIldN" type="text"/>
+                            <input id="appSecretInput" type="text"/>
                         </div>
 
                         <div class="large-2 columns">
@@ -337,6 +338,10 @@ limitations under the License.
                 $("#colorChooser").minicolors('value', rndColor);
             }
         });
+        // retrieve app info from local storage
+        $('#appIdInput').val(localStorage.getItem('appId') || '');
+        $('#appKeyInput').val(localStorage.getItem('appKey') || '');
+        $('#appSecretInput').val(localStorage.getItem('appSecret') || '');
 
         websocketclient.render.toggle('publish');
         websocketclient.render.toggle('messages');

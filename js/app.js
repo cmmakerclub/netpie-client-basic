@@ -79,6 +79,10 @@ var websocketclient = {
         // console.log("connected");
         var body = $('body').addClass('connected').removeClass('notconnected').removeClass('connectionbroke');
 
+        localStorage.setItem("appId", $("#appIdInput").val());
+        localStorage.setItem("appKey", $("#appKeyInput").val());
+        localStorage.setItem("appSecret", $("#appSecretInput").val());
+
         websocketclient.render.hide('conni');
         websocketclient.render.show('publish');
         websocketclient.render.show('sub');
@@ -144,7 +148,7 @@ var websocketclient = {
         if (!websocketclient.connected) {
             websocketclient.render.showError("Not connected");
             return false;
-        } 
+        }
 
         this.client.publish(topic, payload, qos, retain);
         // var message = new Messaging.Message(payload);
