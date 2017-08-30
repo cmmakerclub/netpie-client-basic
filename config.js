@@ -1,2 +1,2 @@
-websocketserver = 'gb.netpie.io';
-websocketport = 8081;
+websocketserver = 'gb.netpie.io'
+websocketport = 8081
