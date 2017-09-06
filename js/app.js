@@ -262,7 +262,7 @@ var websocketclient = {
     'message': function (message) {
 
       var largest = websocketclient.lastMessageId++
-      var _topic = '/' + message.topic.split('/').slice(2).join('/')
+      // var _topic = '/' + message.topic.split('/').slice(2).join('/')
 
       var html = '<li class="messLine id="' + largest + '">' +
         '   <div class="row large-12 mess' + largest + '" style="border-left: solid 10px #' + message.color + '; ">' +
